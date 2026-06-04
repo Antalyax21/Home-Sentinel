@@ -122,6 +122,312 @@
   box-shadow: 0 0 8px var(--accent);
 }
 
+/* === VERROU === */
+.verrou-fond {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.verrou-boite {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.verrou-titre {
+  color: var(--accent);
+  letter-spacing: 6px;
+  font-size: 22px;
+  text-transform: uppercase;
+  text-shadow: 0 0 20px var(--accent);
+}
+
+.verrou-sous-titre {
+  color: var(--text-secondary);
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+/* les 6 ronds de saisie */
+.verrou-points {
+  display: flex;
+  gap: 16px;
+}
+
+.verrou-point {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid var(--text-secondary);
+  transition: all 0.15s;
+}
+
+.verrou-point-rempli {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+}
+
+/* animation shake sur mauvais code */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-8px); }
+  40%       { transform: translateX(8px); }
+  60%       { transform: translateX(-6px); }
+  80%       { transform: translateX(6px); }
+}
+
+.verrou-erreur .verrou-point-rempli {
+  background: var(--danger);
+  border-color: var(--danger);
+  box-shadow: 0 0 8px var(--danger);
+}
+
+.verrou-erreur {
+  animation: shake 0.4s ease;
+}
+
+.verrou-message-erreur {
+  color: var(--danger);
+  font-size: 12px;
+  letter-spacing: 1px;
+  height: 16px;
+}
+
+/* grille du pave numerique */
+.verrou-pave {
+  display: grid;
+  grid-template-columns: repeat(3, 64px);
+  gap: 12px;
+}
+
+.verrou-touche {
+  height: 64px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  font-family: 'Courier New', monospace;
+  font-size: 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.verrou-touche:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: 0 0 10px var(--accent);
+}
+
+.verrou-touche:active {
+  background: rgba(0, 255, 136, 0.1);
+  transform: scale(0.95);
+}
+
+.verrou-touche-effacer {
+  color: var(--text-secondary);
+  font-size: 18px;
+}
+
+/* === Titre pages === */
+.titleD {
+  padding: 20px 20px 10px;
+  color: var(--accent);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-size: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* === Stats alertes === */
+.stat-etiquette {
+  color: var(--text-secondary);
+  font-size: 11px;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+
+.stat-valeur {
+  font-size: 28px;
+  font-weight: bold;
+  color: var(--text-primary);
+}
+
+/* === Barre d'outils alertes === */
+.barre-alertes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.groupe-filtres {
+  display: flex;
+  gap: 8px;
+}
+
+.groupe-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-filtre {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 6px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  letter-spacing: 1px;
+  transition: all 0.2s;
+}
+
+.btn-filtre:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.btn-filtre.actif {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(0, 255, 136, 0.08);
+  box-shadow: 0 0 6px var(--accent);
+}
+
+/* === Liste des alertes === */
+.liste-alertes {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 20px 20px;
+}
+
+.ligne-alerte {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid transparent;
+  border-radius: 4px;
+  padding: 14px 16px;
+  transition: background 0.2s;
+}
+
+.ligne-alerte:hover {
+  background: #222;
+}
+
+.ligne-alerte.alerte-lue {
+  opacity: 0.45;
+}
+
+.indicateur-alerte {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.corps-alerte {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.en-tete-alerte {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.type-alerte {
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+.badge-alerte {
+  font-size: 10px;
+  letter-spacing: 1px;
+  border: 1px solid;
+  border-radius: 3px;
+  padding: 1px 6px;
+}
+
+.meta-alerte {
+  display: flex;
+  gap: 16px;
+  font-size: 12px;
+}
+
+.zone-alerte {
+  color: var(--text-secondary);
+}
+
+.heure-alerte {
+  color: var(--text-secondary);
+  opacity: 0.6;
+}
+
+.actions-alerte {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.btn-lire {
+  background: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  padding: 5px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  transition: all 0.2s;
+}
+
+.btn-lire:hover {
+  background: rgba(0, 255, 136, 0.1);
+}
+
+.btn-supprimer-alerte {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 5px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  transition: all 0.2s;
+}
+
+.btn-supprimer-alerte:hover {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+.alertes-vides {
+  text-align: center;
+  color: var(--text-secondary);
+  padding: 40px;
+  letter-spacing: 2px;
+  font-size: 13px;
+}
+
+/* === Camera feed === */
 .camera-feed {
   background: #000;
   border: 1px solid var(--accent);

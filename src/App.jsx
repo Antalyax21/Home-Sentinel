@@ -1,13 +1,23 @@
+import { useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Sidebar from './components/Sidebar'
-import Dashboard from './pages/Dashboard' 
+import Dashboard from './pages/Dashboard'
 import Alerts from './pages/Alerts'
 import Sensors from './pages/Sensors'
 import Header from './components/Header'
+import Verrou from './pages/Verrou'
 import './App.css'
 
 
 function App() {
+  // false au demarrage → affiche le verrou, true → accede a l'app
+  const [deVerrouille, setDeVerrouille] = useState(false)
+
+  // tant que pas deverrouille on affiche juste le verrou
+  if (!deVerrouille) {
+    return <Verrou onSuccess={() => setDeVerrouille(true)} />
+  }
+
   return (
     <div className='dashboard'>
       <div style={{
