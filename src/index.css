@@ -1,3 +1,51 @@
+:root {
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #111111;
+  --bg-card: #1a1a1a;
+  --accent: #00ff88;
+  --accent-dim: #00cc6a;
+  --text-primary: #ffffff;
+  --text-secondary: #888888;
+  --border: #222222;
+  --danger: #ff3333;
+}
+
+
+@keyframes glitch {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-2px); filter: hue-rotate(90deg); }
+  50% { transform: translateX(2px); }
+  75% { transform: translateX(-1px); filter: hue-rotate(-90deg); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes textPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes borderPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes scanMove {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+input::placeholder { color: #224422; }
+input:focus { border-color: var(--accent) !important; outline: none; }
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #000; }
+::-webkit-scrollbar-thumb { background: #1a3a1a; }
+
 * {
   margin: 0;
   padding: 0;
@@ -5,5 +53,16 @@
 }
 
 body {
-  font-family: sans-serif;
+  font-family: 'Courier New', Courier, monospace;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.blink {
+  animation: blink 2s infinite;
 }

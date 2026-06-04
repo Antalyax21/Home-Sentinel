@@ -10,6 +10,14 @@ import './App.css'
 function App() {
   return (
     <div className='dashboard'>
+      <div style={{
+  position: "fixed", top: 0, left: 0, right: 0,
+  height: 2,
+  background: "linear-gradient(90deg, transparent, rgba(0,255,100,0.3), transparent)",
+  animation: "scanMove 4s linear infinite",
+  pointerEvents: "none",
+  zIndex: 100,
+}} />
       <Header title="Home Sentinel" />
       <Sidebar />
 
