@@ -1,34 +1,25 @@
 import { useState, useEffect } from "react"
-
-// code PIN a mettre dans un fichier .env ,on verra plus tard cest pour voirt si ca marche 
-const CODE_PIN = "123456"
+import { lireSettings } from "../utils/settings"
 
 const Verrou = ({ onSuccess }) => {
-  // chiffres tapés jusqu'ici (max 6)
-  const [saisie, setSaisie] = useState([])
+  const pinAdmin = lireSettings().pinAdmin
+  const longueur = pinAdmin.length
 
-  // true quand mauvais code → declenche l'anim d'erreur
-  const [erreur, setErreur] = useState(false)
-
-  // nb de tentatives ratées
+  const [saisie,     setSaisie]     = useState([])
+  const [erreur,     setErreur]     = useState(false)
   const [tentatives, setTentatives] = useState(0)
 
-  // ajoute un chiffre si on est pas encore a 6
   const ajouterChiffre = (chiffre) => {
-    if (saisie.length < 6) {
-      setSaisie(prev => [...prev, chiffre])
-    }
+    if (saisie.length < longueur) setSaisie(prev => [...prev, chiffre])
   }
 
   // efface le dernier chiffre
   const effacer = () => setSaisie(prev => prev.slice(0, -1))
 
-  // des qu'on a 6 chiffres on verifie automatiquement
   useEffect(() => {
-    if (saisie.length === 6) {
+    if (saisie.length === longueur) {
       const codeEntre = saisie.join("")
-
-      if (codeEntre === CODE_PIN) {
+      if (codeEntre === pinAdmin) {
         // bon code → acces a l'app
         onSuccess()
       } else {
@@ -62,7 +53,7 @@ const Verrou = ({ onSuccess }) => {
 
         {/* 6 cercles → remplis au fur et a mesure de la saisie */}
         <div className={`verrou-points${erreur ? " verrou-erreur" : ""}`}>
-          {Array.from({ length: 6 }).map((_, i) => (
+          {Array.from({ length: longueur }).map((_, i) => (
             <div
               key={i}
               className={`verrou-point${i < saisie.length ? " verrou-point-rempli" : ""}`}

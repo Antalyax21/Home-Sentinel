@@ -441,3 +441,459 @@
   letter-spacing: 2px;
   margin: 10px 0;
 }
+
+/* === Santé Raspberry Pi === */
+.rpi-statut-point {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.rpi-enligne  { background: var(--accent); box-shadow: 0 0 6px var(--accent); }
+.rpi-horsligne { background: var(--danger); box-shadow: 0 0 6px var(--danger); }
+
+.rpi-metrique {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+.rpi-metrique:last-child { border-bottom: none; }
+
+.rpi-metrique-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+.rpi-metrique-label {
+  color: var(--text-secondary);
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+.rpi-metrique-valeur {
+  font-size: 14px;
+  font-weight: bold;
+}
+.rpi-barre-fond {
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.rpi-barre-rempli {
+  height: 100%;
+  border-radius: 2px;
+}
+
+/* === Logs === */
+.ligne-log {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid transparent;
+  border-radius: 4px;
+  padding: 14px 16px;
+  transition: background 0.2s;
+}
+.ligne-log:hover { background: #222; }
+.log-bruteforce  { background: rgba(255, 51, 51, 0.05); }
+
+.log-tag {
+  font-size: 10px;
+  letter-spacing: 1px;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  border-radius: 3px;
+  padding: 2px 6px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.log-corps {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.log-en-tete {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.log-action {
+  font-size: 14px;
+  color: var(--text-primary);
+}
+.log-badges { display: flex; gap: 6px; flex-shrink: 0; }
+
+.log-badge-statut {
+  font-size: 10px;
+  letter-spacing: 1px;
+  border: 1px solid;
+  border-radius: 3px;
+  padding: 1px 6px;
+}
+.log-badge-bf {
+  font-size: 10px;
+  letter-spacing: 1px;
+  border: 1px solid var(--danger);
+  color: var(--danger);
+  border-radius: 3px;
+  padding: 1px 6px;
+  animation: blink 1.5s infinite;
+}
+.log-meta {
+  display: flex;
+  gap: 12px;
+  font-size: 11px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.log-source    { color: var(--text-primary); }
+.log-pays      { color: #ffaa00; }
+.log-port      { color: var(--text-secondary); }
+.log-utilisateur { color: var(--text-secondary); }
+.log-heure     { color: var(--text-secondary); opacity: 0.6; margin-left: auto; }
+
+.log-recherche {
+  flex: 1;
+  min-width: 200px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  padding: 8px 14px;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+}
+
+.log-banniere-anciens {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: rgba(255, 170, 0, 0.08);
+  border: 1px solid #ffaa00;
+  border-radius: 4px;
+  padding: 14px 20px;
+  margin: 0 20px 12px;
+  flex-wrap: wrap;
+}
+.log-banniere-texte {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.log-banniere-icone {
+  color: #ffaa00;
+  font-size: 18px;
+  font-weight: bold;
+}
+.log-banniere-actions { display: flex; gap: 8px; }
+
+.log-pagination {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 16px 20px;
+  flex-wrap: wrap;
+}
+.log-pagination-sep  { color: var(--text-secondary); }
+.log-pagination-info { color: var(--text-secondary); font-size: 12px; margin-left: auto; }
+
+/* === Header armé === */
+.header-arme {
+  border-bottom-color: var(--danger) !important;
+  box-shadow: 0 0 15px var(--danger) !important;
+}
+.header-badge {
+  font-size: 11px;
+  letter-spacing: 3px;
+  padding: 4px 14px;
+  border-radius: 3px;
+  border: 1px solid;
+}
+.header-badge-arme {
+  color: var(--danger);
+  border-color: var(--danger);
+  background: rgba(255, 51, 51, 0.1);
+  animation: blink 1.2s infinite;
+}
+.header-badge-desarme {
+  color: var(--text-secondary);
+  border-color: var(--border);
+}
+
+.btn-lockdown {
+  background: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  padding: 6px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  transition: all 0.2s;
+}
+.btn-lockdown:hover {
+  background: rgba(0, 255, 136, 0.1);
+  box-shadow: 0 0 8px var(--accent);
+}
+.btn-lockdown-actif {
+  background: rgba(255, 51, 51, 0.15);
+  border: 1px solid var(--danger);
+  color: var(--danger);
+  padding: 6px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  transition: all 0.2s;
+  animation: blink 1.5s infinite;
+}
+.btn-lockdown-actif:hover {
+  background: rgba(255, 51, 51, 0.25);
+  box-shadow: 0 0 10px var(--danger);
+}
+
+/* === Lockdown bannière dashboard === */
+.lockdown-banniere {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: rgba(255, 51, 51, 0.08);
+  border: 1px solid var(--danger);
+  border-radius: 4px;
+  padding: 10px 20px;
+  margin: 12px 20px 0;
+  color: var(--danger);
+  font-size: 12px;
+  letter-spacing: 2px;
+  animation: blink 2s infinite;
+}
+
+/* === Carte lockdown dashboard === */
+.card-lockdown {
+  border-color: var(--border);
+  transition: all 0.2s;
+}
+.card-lockdown:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 12px rgba(0,255,136,0.2) !important;
+}
+.card-lockdown-actif {
+  border-color: var(--danger) !important;
+  box-shadow: 0 0 12px rgba(255,51,51,0.25) !important;
+}
+
+/* === App armée === */
+.app-arme .sidebar {
+  border-right-color: var(--danger);
+}
+
+/* === Mini caméras dashboard === */
+.cameras-mini-grille {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.camera-mini-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 10px;
+  transition: border-color 0.2s;
+}
+.camera-mini-card:hover { border-color: var(--accent); }
+.camera-inactive { opacity: 0.5; }
+
+.camera-mini-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.camera-mini-nom  { font-size: 11px; color: var(--accent); letter-spacing: 2px; }
+.camera-mini-zone { font-size: 10px; color: var(--text-secondary); }
+.camera-mini-dot  { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.cam-dot-live { background: var(--accent); box-shadow: 0 0 5px var(--accent); animation: blink 2s infinite; }
+.cam-dot-off  { background: var(--danger); }
+
+.camera-feed-mini {
+  font-size: 9px !important;
+  letter-spacing: 1px !important;
+}
+
+/* === Page Caméras === */
+.cameras-grille {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding: 16px 20px;
+}
+.camera-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.camera-card-zone {
+  font-size: 11px;
+  color: var(--text-secondary);
+  letter-spacing: 1px;
+  border: 1px solid var(--border);
+  padding: 2px 8px;
+  border-radius: 3px;
+}
+.camera-card-inactive { opacity: 0.6; }
+
+.camera-badge-systeme {
+  font-size: 11px;
+  color: var(--text-secondary);
+  letter-spacing: 1px;
+  opacity: 0.8;
+}
+.camera-feed-off {
+  border-color: var(--danger) !important;
+}
+
+/* === Dashboard confirmation === */
+.dash-confirm {
+  margin-top: 12px;
+  padding: 12px 14px;
+  background: rgba(255, 51, 51, 0.06);
+  border: 1px solid var(--danger);
+  border-radius: 4px;
+}
+
+/* === Paramètres === */
+.param-grille {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  padding: 0 20px;
+}
+
+.param-section { margin: 0; }
+
+.param-titre-section {
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--accent);
+  margin-bottom: 18px;
+  text-transform: uppercase;
+}
+
+.param-ligne {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.param-label {
+  font-size: 12px;
+  color: var(--text-secondary);
+  letter-spacing: 0.5px;
+}
+
+.param-input {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  transition: border-color 0.2s;
+}
+.param-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+.param-input.param-erreur {
+  border-color: var(--danger);
+}
+
+.param-msg-erreur {
+  font-size: 11px;
+  color: var(--danger);
+  letter-spacing: 0.5px;
+}
+
+.param-desc {
+  font-size: 11px;
+  color: var(--text-secondary);
+  letter-spacing: 0.3px;
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.param-hash-bloc {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  padding: 12px 14px;
+}
+
+.param-hash-code {
+  flex: 1;
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  color: var(--accent);
+  word-break: break-all;
+  line-height: 1.6;
+}
+
+.param-btn-copier {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+.param-btn-copier:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.param-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 20px 0;
+  flex-wrap: wrap;
+}
+
+/* === Blacklist === */
+.bl-formulaire {
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.bl-champs {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.bl-erreur {
+  color: var(--danger);
+  font-size: 12px;
+  letter-spacing: 1px;
+}

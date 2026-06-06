@@ -1,0 +1,629 @@
+/* ================================================================
+   USER TABLET — style kiosque entrée
+   Volontairement différent du dashboard ADMIN :
+   - Police sans-serif (vs monospace admin)
+   - Palette bleu/indigo (vs vert néon admin)
+   - Arrondis généreux, grands touch targets
+   - Ambiance "maison connectée" vs "terminal hacker"
+   ================================================================ */
+
+:root {
+  --u-bg:       #0b0f1a;
+  --u-bg2:      #111827;
+  --u-bg3:      #1a2236;
+  --u-blue:     #4f9eff;
+  --u-blue-dim: #2d6abf;
+  --u-text:     #f0f4ff;
+  --u-muted:    #6b7a99;
+  --u-border:   #1e2d45;
+  --u-success:  #22d3a5;
+  --u-danger:   #ff5a5a;
+  --u-warn:     #ffb347;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+.u-fond {
+  min-height: 100vh;
+  background: var(--u-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: var(--u-text);
+  transition: background 0.6s ease;
+}
+
+.u-fond-arme    { background: #0a0c17; }
+.u-fond-alarme  { background: #180808; }
+.u-fond-succes  { background: #071410; }
+
+/* dim progressif — filtre CSS suffit, pas besoin de JS pour la visuel */
+.u-fond-dim {
+  filter: brightness(0.25);
+  transition: filter 1.5s ease;
+}
+.u-fond { transition: filter 1.5s ease, background 0.6s ease; }
+
+/* ── VEILLE ──────────────────────────────────────────────────── */
+.u-veille {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  max-width: 420px;
+  padding: 40px 20px 32px;
+}
+
+/* badge armé */
+.u-badge-arme {
+  background: rgba(79, 158, 255, 0.1);
+  border: 1px solid var(--u-blue-dim);
+  color: var(--u-blue);
+  font-size: 11px;
+  letter-spacing: 2px;
+  padding: 6px 18px;
+  border-radius: 20px;
+  animation: u-pulse 2.5s ease-in-out infinite;
+}
+
+/* horloge */
+.u-horloge { text-align: center; }
+
+.u-heure {
+  font-size: 80px;
+  font-weight: 200;
+  color: var(--u-text);
+  letter-spacing: -2px;
+  line-height: 1;
+}
+
+.u-sec {
+  font-size: 40px;
+  color: var(--u-muted);
+  font-weight: 200;
+}
+
+.u-date {
+  font-size: 14px;
+  color: var(--u-muted);
+  margin-top: 6px;
+  letter-spacing: 0.5px;
+}
+
+/* météo */
+.u-meteo {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--u-bg2);
+  border: 1px solid var(--u-border);
+  border-radius: 16px;
+  padding: 14px 24px;
+  width: 100%;
+}
+
+.u-meteo-icone { font-size: 36px; }
+
+.u-meteo > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.u-meteo-temp  { font-size: 26px; font-weight: 300; color: var(--u-text); }
+.u-meteo-label { font-size: 13px; color: var(--u-muted); }
+.u-meteo-vent  { font-size: 11px; color: var(--u-muted); opacity: 0.7; }
+
+/* tâches */
+.u-taches {
+  width: 100%;
+  background: var(--u-bg2);
+  border: 1px solid var(--u-border);
+  border-radius: 16px;
+  padding: 16px 18px;
+}
+
+.u-taches-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.u-taches-titre {
+  font-size: 12px;
+  color: var(--u-muted);
+  letter-spacing: 1px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.u-btn-plus {
+  width: 28px;
+  height: 28px;
+  background: var(--u-bg3);
+  border: 1px solid var(--u-border);
+  color: var(--u-blue);
+  border-radius: 8px;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+.u-btn-plus:hover { border-color: var(--u-blue); background: rgba(79,158,255,0.1); }
+
+.u-input {
+  width: 100%;
+  background: var(--u-bg3);
+  border: 1px solid var(--u-border);
+  border-radius: 10px;
+  color: var(--u-text);
+  font-size: 14px;
+  padding: 10px 14px;
+  margin-bottom: 10px;
+  font-family: inherit;
+}
+.u-input:focus { outline: none; border-color: var(--u-blue); }
+
+.u-taches-vide {
+  font-size: 13px;
+  color: var(--u-muted);
+  text-align: center;
+  padding: 6px 0;
+  opacity: 0.5;
+}
+
+.u-taches-liste {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.u-tache {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--u-text);
+  padding: 4px 0;
+  transition: opacity 0.2s;
+  user-select: none;
+}
+.u-tache:hover { opacity: 0.75; }
+.u-faite { opacity: 0.35; }
+.u-faite span:last-child { text-decoration: line-through; color: var(--u-muted); }
+
+.u-check { color: var(--u-blue); font-size: 14px; width: 18px; flex-shrink: 0; }
+.u-faite .u-check { color: var(--u-success); }
+
+/* actions veille */
+.u-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.u-btn-partir {
+  width: 100%;
+  padding: 16px;
+  background: rgba(79, 158, 255, 0.1);
+  border: 1px solid var(--u-blue-dim);
+  color: var(--u-blue);
+  border-radius: 14px;
+  font-size: 15px;
+  font-family: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: all 0.2s;
+}
+.u-btn-partir:hover {
+  background: rgba(79, 158, 255, 0.18);
+  box-shadow: 0 0 20px rgba(79, 158, 255, 0.15);
+}
+
+.u-btn-test {
+  background: none;
+  border: none;
+  color: #1a2236;
+  font-size: 10px;
+  cursor: pointer;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 1px;
+  transition: color 0.2s;
+}
+.u-btn-test:hover { color: #2a3a56; }
+
+/* ── AUTH (entrée + sortie) ──────────────────────────────────── */
+.u-auth {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  padding: 48px 24px;
+}
+
+.u-pin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.u-pin-label {
+  font-size: 15px;
+  color: var(--u-muted);
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+
+/* points PIN */
+.u-points {
+  display: flex;
+  gap: 22px;
+}
+
+.u-point {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--u-border);
+  transition: all 0.15s;
+}
+
+.u-rempli {
+  background: var(--u-blue);
+  border-color: var(--u-blue);
+  box-shadow: 0 0 12px rgba(79, 158, 255, 0.5);
+}
+
+@keyframes u-shake {
+  0%,100% { transform: translateX(0); }
+  20%     { transform: translateX(-10px); }
+  40%     { transform: translateX(10px); }
+  60%     { transform: translateX(-7px); }
+  80%     { transform: translateX(7px); }
+}
+
+.u-erreur                     { animation: u-shake 0.4s ease; }
+.u-erreur .u-rempli           { background: var(--u-danger); border-color: var(--u-danger); box-shadow: 0 0 12px rgba(255,90,90,0.5); }
+
+.u-pin-erreur-msg {
+  font-size: 12px;
+  color: var(--u-danger);
+  height: 14px;
+  letter-spacing: 0.5px;
+}
+
+/* pavé numérique */
+.u-pave {
+  display: grid;
+  grid-template-columns: repeat(3, 80px);
+  gap: 12px;
+}
+
+.u-key {
+  height: 80px;
+  background: var(--u-bg2);
+  border: 1px solid var(--u-border);
+  color: var(--u-text);
+  font-size: 24px;
+  font-weight: 300;
+  border-radius: 14px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.12s;
+  user-select: none;
+}
+.u-key:hover  { border-color: var(--u-blue); color: var(--u-blue); background: rgba(79,158,255,0.06); }
+.u-key:active { transform: scale(0.92); background: rgba(79,158,255,0.12); }
+.u-key-del    { color: var(--u-muted); font-size: 20px; }
+
+.u-annuler {
+  background: none;
+  border: none;
+  color: var(--u-muted);
+  font-size: 13px;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: 0.5px;
+  transition: color 0.2s;
+}
+.u-annuler:hover { color: var(--u-text); }
+
+/* countdown */
+.u-countdown {
+  font-size: 28px;
+  font-weight: 200;
+  color: var(--u-muted);
+  letter-spacing: 2px;
+  transition: color 0.3s;
+}
+.u-countdown-urgent {
+  color: var(--u-danger);
+  animation: u-pulse 0.5s ease-in-out infinite;
+}
+
+@keyframes u-pulse {
+  0%,100% { opacity: 1; }
+  50%     { opacity: 0.45; }
+}
+
+/* ── RÉSULTATS (succès / alarme) ─────────────────────────────── */
+.u-resultat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  padding: 48px 24px;
+}
+
+.u-icone-succes,
+.u-icone-arme,
+.u-icone-alarme {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 38px;
+}
+
+.u-icone-succes {
+  background: rgba(34, 211, 165, 0.1);
+  border: 2px solid var(--u-success);
+  color: var(--u-success);
+  box-shadow: 0 0 30px rgba(34, 211, 165, 0.2);
+}
+
+.u-icone-arme {
+  background: rgba(79, 158, 255, 0.1);
+  border: 2px solid var(--u-blue);
+  box-shadow: 0 0 30px rgba(79, 158, 255, 0.2);
+}
+
+.u-icone-alarme {
+  background: rgba(255, 90, 90, 0.1);
+  border: 2px solid var(--u-danger);
+  color: var(--u-danger);
+  box-shadow: 0 0 30px rgba(255, 90, 90, 0.3);
+}
+
+.u-msg-principal {
+  font-size: 26px;
+  font-weight: 300;
+  color: var(--u-text);
+  letter-spacing: 1px;
+}
+.u-msg-alarme  { color: var(--u-danger); }
+.u-msg-sub {
+  font-size: 14px;
+  color: var(--u-muted);
+  letter-spacing: 0.5px;
+}
+
+.u-btn-reset {
+  margin-top: 8px;
+  background: transparent;
+  border: 1px solid var(--u-danger);
+  color: var(--u-danger);
+  font-family: inherit;
+  font-size: 13px;
+  padding: 10px 24px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.u-btn-reset:hover {
+  background: rgba(255, 90, 90, 0.1);
+  box-shadow: 0 0 12px rgba(255, 90, 90, 0.2);
+}
+
+/* ── ÉCRAN VERROUILLÉ ────────────────────────────────────────── */
+.u-verrou {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  min-height: 100vh;
+  width: 100%;
+  cursor: pointer;
+  user-select: none;
+}
+
+.u-heure-compact {
+  font-size: 96px;
+  font-weight: 100;
+  color: rgba(240, 244, 255, 0.6);
+  letter-spacing: -4px;
+}
+.u-sec-compact {
+  font-size: 48px;
+  color: rgba(240, 244, 255, 0.3);
+}
+
+.u-verrou-hint {
+  font-size: 13px;
+  color: rgba(107, 122, 153, 0.5);
+  letter-spacing: 2px;
+  animation: u-pulse 3s ease-in-out infinite;
+}
+
+/* ── CONFIRMATION CAPTEURS OUVERTS ───────────────────────────── */
+.u-confirm-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  background: var(--u-bg2);
+  border: 1px solid var(--u-warn);
+  border-radius: 20px;
+  padding: 32px 28px;
+  max-width: 340px;
+  width: 100%;
+}
+
+.u-confirm-icone {
+  font-size: 40px;
+  color: var(--u-warn);
+}
+
+.u-confirm-titre {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--u-warn);
+  letter-spacing: 0.5px;
+}
+
+.u-confirm-liste {
+  list-style: none;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.u-confirm-item {
+  font-size: 14px;
+  color: var(--u-muted);
+  padding: 6px 10px;
+  background: var(--u-bg3);
+  border-radius: 8px;
+}
+
+.u-confirm-sub {
+  font-size: 13px;
+  color: var(--u-muted);
+  text-align: center;
+}
+
+.u-confirm-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  margin-top: 4px;
+}
+
+.u-btn-confirmer {
+  width: 100%;
+  padding: 14px;
+  background: rgba(255, 179, 71, 0.1);
+  border: 1px solid var(--u-warn);
+  color: var(--u-warn);
+  border-radius: 12px;
+  font-size: 15px;
+  font-family: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.u-btn-confirmer:hover {
+  background: rgba(255, 179, 71, 0.18);
+  box-shadow: 0 0 16px rgba(255, 179, 71, 0.15);
+}
+
+/* ── DÉLAI DE SORTIE ─────────────────────────────────────────── */
+.u-delai-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.u-delai-cercle {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.9s linear;
+}
+
+/* anneau blanc au centre pour effet donut */
+.u-delai-cercle::after {
+  content: "";
+  position: absolute;
+  width: 108px;
+  height: 108px;
+  border-radius: 50%;
+  background: var(--u-bg);
+}
+
+.u-delai-cercle { position: relative; }
+
+.u-delai-chiffre {
+  position: relative;
+  z-index: 1;
+  font-size: 48px;
+  font-weight: 200;
+  color: var(--u-text);
+}
+
+.u-delai-titre {
+  font-size: 22px;
+  font-weight: 300;
+  color: var(--u-text);
+  letter-spacing: 1px;
+}
+
+.u-delai-sub {
+  font-size: 14px;
+  color: var(--u-muted);
+  text-align: center;
+}
+
+/* ── HISTORIQUE ──────────────────────────────────────────────── */
+.u-histo {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.u-histo-liste {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.u-histo-ligne {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  background: var(--u-bg2);
+  border: 1px solid var(--u-border);
+  border-radius: 10px;
+  font-size: 13px;
+}
+
+.u-histo-icone {
+  font-size: 14px;
+  width: 18px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.u-histo-label {
+  color: var(--u-text);
+  flex: 1;
+}
+
+.u-histo-heure {
+  color: var(--u-muted);
+  font-size: 12px;
+}
