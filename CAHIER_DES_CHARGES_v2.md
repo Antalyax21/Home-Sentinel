@@ -1,6 +1,5 @@
 # HOME SENTINEL — Cahier des Charges Technique
-> Version 2.0 · Juin 2026 · Lylia · Z Code Digital Solutions · Évreux, Normandie
-> **Confidentiel** — Remplace la version 1.0 (Mai 2026).
+> Version 2.0 · Juin 2026 · Lylia 
 
 ---
 
